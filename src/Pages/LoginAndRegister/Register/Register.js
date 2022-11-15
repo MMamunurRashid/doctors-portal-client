@@ -37,7 +37,9 @@ const Register = () => {
           displayName: data.name,
         };
         updateUser(userInfo)
-          .then(() => {})
+          .then(() => {
+            navigate("/");
+          })
           .catch((err) => console.error(err));
       })
       .catch((err) => {
@@ -117,7 +119,7 @@ const Register = () => {
           </div>
           <input
             className="btn btn-accent w-full mt-3"
-            value="Login"
+            value="Sign Up"
             type="submit"
           />
           {signupError && <p className="text-red-600">{signupError}</p>}
