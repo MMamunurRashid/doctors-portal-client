@@ -28,6 +28,19 @@ const Navbar = () => {
         <Link to="/contact-us">Contact Us</Link>
       </li>
       <li>{user?.uid ? <Link to="/dashboard">Dashboard</Link> : <></>}</li>
+      <li>
+        {user?.uid ? (
+          <>
+            <button onClick={handleLogout} className="btn btn-ghost rounded-lg">
+              Log Out
+            </button>
+          </>
+        ) : (
+          <Link to="/login" className="btn btn-ghost rounded-lg">
+            Login
+          </Link>
+        )}
+      </li>
     </>
   );
   return (
@@ -52,7 +65,7 @@ const Navbar = () => {
               </svg>
             </label>
             <ul
-              tabIndex={0}
+              tabIndex={1}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               {menuItem}
@@ -66,17 +79,26 @@ const Navbar = () => {
           <ul className="menu menu-horizontal p-0">{menuItem}</ul>
         </div>
         <div className="navbar-end">
-          {user?.uid ? (
-            <>
-              <button onClick={handleLogout} className="btn">
-                Log Out
-              </button>
-            </>
-          ) : (
-            <Link to="/login" className="btn">
-              Login
-            </Link>
-          )}
+          <label
+            htmlFor="dashboard-drawer"
+            tabIndex={2}
+            className="btn btn-ghost lg:hidden"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </label>
         </div>
       </div>
     </div>

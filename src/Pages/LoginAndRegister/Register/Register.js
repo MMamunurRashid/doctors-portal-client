@@ -5,12 +5,13 @@ import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 import { GoogleAuthProvider } from "firebase/auth";
+import useToken from "../../../hooks/useToken";
 
 const Register = () => {
   const { createUser, updateUser, googleLogin } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
 
-  const [signupError, setSignupError] = useState(" ");
+  const [signupError, setSignupError] = useState("");
   const {
     register,
     handleSubmit,
@@ -20,8 +21,14 @@ const Register = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
+  const [token] = useToken(createdUserEmail);
+
   const from = location.state?.from?.pathname || "/";
 
+  if (token) {
+    navigate(from, { replace: true });
+  }
   const handleSignup = (data) => {
     console.log(data);
     const email = data.email;
@@ -38,7 +45,7 @@ const Register = () => {
         };
         updateUser(userInfo)
           .then(() => {
-            navigate("/");
+            saveUserInDb(data.name, data.email);
           })
           .catch((err) => console.error(err));
       })
@@ -59,6 +66,24 @@ const Register = () => {
       })
       .catch((error) => console.error(error));
   };
+
+  const saveUserInDb = (name, email) => {
+    const user = { name, email };
+    fetch(`http://localhost:5000/users`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("save-user", data);
+
+        setCreatedUserEmail(email);
+      });
+  };
+
   return (
     <div className="h-[800px] flex justify-center items-center">
       <div className="w-96 p-7">
