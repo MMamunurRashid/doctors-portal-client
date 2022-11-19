@@ -28,7 +28,7 @@ const Login = () => {
   } = useForm();
 
   const handleLogin = (data) => {
-    console.log(data);
+    //console.log(data);
     const email = data.email;
     const password = data.password;
 
@@ -36,7 +36,7 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        //console.log(user);
         setLoginUserEmail(data.email);
       })
       .catch((err) => {
@@ -50,7 +50,7 @@ const Login = () => {
     googleLogin(googleProvider)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        //console.log(user);
         navigate(from, { replace: true });
       })
       .catch((error) => console.error(error));

@@ -30,7 +30,7 @@ const Register = () => {
     navigate(from, { replace: true });
   }
   const handleSignup = (data) => {
-    console.log(data);
+    //console.log(data);
     const email = data.email;
     const password = data.password;
 
@@ -38,7 +38,7 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        //console.log(user);
         toast.success("Your Registration Successful!!");
         const userInfo = {
           displayName: data.name,
@@ -50,7 +50,7 @@ const Register = () => {
           .catch((err) => console.error(err));
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
         setSignupError(err.message);
         toast.error(`${err.message}`);
       });
@@ -61,7 +61,7 @@ const Register = () => {
     googleLogin(googleProvider)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        //console.log(user);
         navigate(from, { replace: true });
       })
       .catch((error) => console.error(error));
@@ -69,7 +69,7 @@ const Register = () => {
 
   const saveUserInDb = (name, email) => {
     const user = { name, email };
-    fetch(`http://localhost:5000/users`, {
+    fetch(`https://doctors-portal-server-five.vercel.app/users`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -78,7 +78,7 @@ const Register = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("save-user", data);
+        //console.log("save-user", data);
 
         setCreatedUserEmail(email);
       });
