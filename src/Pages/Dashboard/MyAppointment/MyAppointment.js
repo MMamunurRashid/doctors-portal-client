@@ -1,12 +1,13 @@
 import { async } from "@firebase/util";
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 
 const MyAppointment = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `https://doctors-portal-server-five.vercel.app/bookings?email=${user.email}`;
+  const url = `http://localhost:5000/bookings?email=${user.email}`;
   const { data: bookings = [] } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
@@ -31,6 +32,8 @@ const MyAppointment = () => {
             <th>Treatment</th>
             <th>Date</th>
             <th>Time</th>
+            <th>Fees</th>
+            <th>payment</th>
           </tr>
         </thead>
         <tbody>
@@ -41,6 +44,22 @@ const MyAppointment = () => {
               <td>{booking.treatment}</td>
               <td>{booking.appointmentDate}</td>
               <td>{booking.slot}</td>
+              <td>{booking.price}</td>
+              <td>
+                {booking.price && !booking.paid && (
+                  <Link
+                    to={`/dashboard/payment/${booking._id}`}
+                    className="btn btn-primary btn-sm"
+                  >
+                    Pay
+                  </Link>
+                )}
+                {booking.price && booking.paid && (
+                  <button className="btn  text-white btn-sm btn-disabled">
+                    Paid
+                  </button>
+                )}
+              </td>
             </tr>
           ))}
         </tbody>

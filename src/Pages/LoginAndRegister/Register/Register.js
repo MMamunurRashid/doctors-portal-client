@@ -69,7 +69,7 @@ const Register = () => {
 
   const saveUserInDb = (name, email) => {
     const user = { name, email };
-    fetch(`https://doctors-portal-server-five.vercel.app/users`, {
+    fetch(`http://localhost:5000/users`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

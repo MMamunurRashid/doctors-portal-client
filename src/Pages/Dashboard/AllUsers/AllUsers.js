@@ -7,16 +7,14 @@ const AllUsers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch(
-        "https://doctors-portal-server-five.vercel.app/users"
-      );
+      const res = await fetch("http://localhost:5000/users");
       const data = await res.json();
       return data;
     },
   });
 
   const handleMakeAdmin = (id) => {
-    fetch(`https://doctors-portal-server-five.vercel.app/users/admin/${id}`, {
+    fetch(`http://localhost:5000/users/admin/${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,

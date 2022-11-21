@@ -5,7 +5,7 @@ import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 
 const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
   // treatment is nothing but appointment option with name, _id, slots.
-  const { name, slots } = treatment;
+  const { name, slots, price } = treatment;
   const date = format(selectedDate, "PP");
 
   const { user } = useContext(AuthContext);
@@ -26,12 +26,13 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
       slot,
       email,
       phone,
+      price,
     };
 
     // TODO: send data to the server
     // and once data is saved then close the modal
     // and display success toast
-    fetch("https://doctors-portal-server-five.vercel.app/bookings", {
+    fetch("http://localhost:5000/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",
