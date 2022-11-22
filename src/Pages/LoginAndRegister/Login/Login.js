@@ -5,8 +5,11 @@ import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
 import useToken from "../../../hooks/useToken";
+import useTitle from "../../../hooks/useTitle";
 
 const Login = () => {
+  useTitle("Login");
+
   const { signIn, googleLogin } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
 

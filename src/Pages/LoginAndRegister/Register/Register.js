@@ -6,8 +6,10 @@ import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 import { GoogleAuthProvider } from "firebase/auth";
 import useToken from "../../../hooks/useToken";
+import useTitle from "../../../hooks/useTitle";
 
 const Register = () => {
+  useTitle("Sign Up");
   const { createUser, updateUser, googleLogin } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
 
@@ -69,7 +71,7 @@ const Register = () => {
 
   const saveUserInDb = (name, email) => {
     const user = { name, email };
-    fetch(`http://localhost:5000/users`, {
+    fetch(`https://doctors-portal-server-five.vercel.app/users`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

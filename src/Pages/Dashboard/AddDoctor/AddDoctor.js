@@ -3,9 +3,12 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import useTitle from "../../../hooks/useTitle";
 import Loading from "../../Shared/Loading/Loading";
 
 const AddDoctor = () => {
+  useTitle("Add A Doctor");
+
   const imageHostKey = process.env.REACT_APP_imgbb_key;
 
   const {
@@ -18,7 +21,9 @@ const AddDoctor = () => {
   const { data: specialties, isLoading } = useQuery({
     queryKey: ["specialty"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/appointmentSpecialty");
+      const res = await fetch(
+        "https://doctors-portal-server-five.vercel.app/appointmentSpecialty"
+      );
       const data = await res.json();
       return data;
     },
@@ -45,7 +50,7 @@ const AddDoctor = () => {
             image: imgData.data.url,
           };
           // save doctor information to the database
-          fetch("http://localhost:5000/doctors", {
+          fetch("https://doctors-portal-server-five.vercel.app/doctors", {
             method: "POST",
             headers: {
               "content-type": "application/json",
