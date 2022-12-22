@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import img from "../../../assets/images/bg.png";
 import chair from "../../../assets/images/chair.png";
 
@@ -19,9 +20,12 @@ const Banner = () => {
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
             a id nisi.
           </p>
-          <button className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white">
+          <Link
+            to="/appointment"
+            className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white"
+          >
             Get Started
-          </button>
+          </Link>
         </div>
       </div>
     </div>

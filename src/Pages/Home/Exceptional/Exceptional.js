@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import img from "../../../assets/images/treatment.png";
 
 const Exceptional = () => {
@@ -20,7 +21,9 @@ const Exceptional = () => {
             here', making it look like readable English. Many desktop publishing
             packages and web page.
           </p>
-          <button className="btn btn-primary w-1/3 ">Get Started</button>
+          <Link to="/appointment" className="btn btn-primary w-1/3 ">
+            Get Started
+          </Link>
         </div>
       </div>
     </div>
