@@ -57,7 +57,7 @@ const Login = () => {
   
 
         saveUserInDb(user.displayName, user.email);
-
+setLoginUserEmail(user.email);
         toast.success("Your Login Successful!!");
       })
       .catch((err) => {
