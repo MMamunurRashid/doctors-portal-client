@@ -48,17 +48,40 @@ const Login = () => {
       });
   };
 
-  // google login
+  // login with google
   const handleGoogleLogin = () => {
+   
     googleLogin(googleProvider)
       .then((result) => {
         const user = result.user;
-        //console.log(user);
-        navigate(from, { replace: true });
-      })
-      .catch((error) => console.error(error));
-  };
+  
 
+        saveUserInDb(user.displayName, user.email);
+
+        toast.success("Your Login Successful!!");
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoginError(err.message);
+        toast.error(`${err.message}`);
+      });
+  };
+  const saveUserInDb = (name, email) => {
+    const user = { name, email };
+    fetch(`https://doctors-portal-server-five.vercel.app/users`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log("save-user", data);
+
+
+      });
+  };
   return (
     <div className="h-[800px] flex justify-center items-center">
       <div className="w-96 p-7">
